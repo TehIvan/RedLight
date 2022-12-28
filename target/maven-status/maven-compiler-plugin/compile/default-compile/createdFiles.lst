@@ -1,0 +1,4 @@
+com\devnics\RedLight\command\RedLightCommand.class
+com\devnics\RedLight\RedLightPlugin.class
+com\devnics\RedLight\Util.class
+com\devnics\RedLight\Game.class

@@ -1,0 +1,4 @@
+name: RedLight
+version: '1.0-SNAPSHOT'
+main: com.devnics.RedLight.RedLightPlugin
+api-version: 1.19
