@@ -18,7 +18,7 @@ public class Game {
     private ArrayList<UUID> players = new ArrayList<>();
     private ArrayList<UUID> winners = new ArrayList<>();
 
-    boolean isRedLight = false;
+    public boolean isRedLight = false;
 
     private BukkitRunnable timer = null;
 
@@ -76,6 +76,8 @@ public class Game {
         this.startGame();
     }
 
+    // TP to winner's area, set to array list
+    public void setWinner(Player player) {}
     public void addPlayer(Player player) {
         this.players.add(player.getUniqueId());
 
@@ -102,4 +104,7 @@ public class Game {
         return players;
     }
 
+    public ArrayList<UUID> getWinners() {
+        return winners;
+    }
 }
