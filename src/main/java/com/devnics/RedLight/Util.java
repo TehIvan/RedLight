@@ -9,4 +9,8 @@ public class Util {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
     }
 
+    public static String translate(String msg) {
+        return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
 }
