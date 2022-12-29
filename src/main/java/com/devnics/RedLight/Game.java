@@ -8,11 +8,9 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
@@ -48,10 +46,9 @@ public class Game {
         this.timer.runTaskTimer(this.plugin, 0, 20 * 60);
 
         int a = this.round * 4;
-        int time = new Random().nextInt(5, a < 5 ? a * 2 : a);
 
-        this.light = new LightTimer(this.plugin, this, time * 20);
-        this.light.runTaskTimer(this.plugin, 0, time * 20);
+        this.light = new LightTimer(this.plugin, this);
+        this.light.runTaskTimer(this.plugin, 20, 20);
 
         this.winners = new ArrayList<>();
         this.losers = new ArrayList<>();
@@ -105,7 +102,7 @@ public class Game {
         this.losers = new ArrayList<>();
 
         for (Player player: Bukkit.getOnlinePlayers()) {
-            if (this.players.contains(player.getUniqueId())) {
+            if (this.winners.contains(player.getUniqueId()) || this.losers.contains(player.getUniqueId())) {
                 Bukkit.dispatchCommand(player, "spawn");
                 player.setGameMode(GameMode.SURVIVAL);
             }
@@ -142,7 +139,7 @@ public class Game {
         int coins = 100 - (winners.size() * 10);
 
         if (coins != 0) {
-            // Give coins
+            this.plugin.economy.depositPlayer(player, coins);
             Util.send(player, "You have received &e${c}!".replace("{c}", Integer.toString(coins)));
         } else {
             Util.send(player, "&cYou completed the round too slow! No coins for you.");
@@ -168,14 +165,6 @@ public class Game {
         this.players.stream().filter(r -> !this.winners.contains(r)).forEach(uuid -> {
             Player player = Bukkit.getPlayer(uuid);
             if (player != null) {
-
-                player.sendTitle(
-                        isRedLight ? ChatColor.RED + "" + ChatColor.BOLD + "RED LIGHT" : ChatColor.GREEN + "" + ChatColor.BOLD + "GREEN LIGHT",
-                        "",
-                        0,
-                        20,
-                        20
-                );
                 this.isRedLight = isRedLight;
 
                 if (isRedLight) {

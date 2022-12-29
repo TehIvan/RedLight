@@ -2,3 +2,5 @@ name: RedLight
 version: '${project.version}'
 main: com.devnics.RedLight.RedLightPlugin
 api-version: 1.19
+depend:
+  - Vault

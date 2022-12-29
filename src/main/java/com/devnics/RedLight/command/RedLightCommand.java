@@ -48,4 +48,18 @@ public class RedLightCommand extends BaseCommand {
     public void startGame(CommandSender sender) {
         this.plugin.game.startGame();
     }
+
+    @Subcommand("light")
+    @CommandPermission("red.use")
+    public void ChangeLight(CommandSender sender) {
+        this.plugin.game.setRedLight(!this.plugin.game.isRedLight);
+        Util.send(sender, "Now: " + (this.plugin.game.isRedLight ? "&cRED" : "&aGREEN"));
+    }
+
+    @Subcommand("end")
+    @CommandPermission("red.use")
+    public void End(CommandSender sender) {
+        this.plugin.game.end();
+        Util.send(sender, "&cDone!");
+    }
 }
