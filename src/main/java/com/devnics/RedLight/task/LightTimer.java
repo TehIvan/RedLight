@@ -6,6 +6,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -26,8 +27,16 @@ public class LightTimer extends BukkitRunnable {
 
             if (player == null) continue;
 
-            player.
-                    spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.translateAlternateColorCodes('&', this.game.isRedLight ? "&cRED" : "&aGREEN")));
+            if (!this.game.isRedLight) {
+                player.playSound(
+                        player.getLocation(),
+                        Sound.BLOCK_STONE_BUTTON_CLICK_OFF,
+                        5,
+                        5
+                );
+            }
+
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.translateAlternateColorCodes('&', this.game.isRedLight ? "&cRed Light" : "&aGreen Light")));
         }
     }
 }

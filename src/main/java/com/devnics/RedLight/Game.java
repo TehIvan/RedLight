@@ -3,6 +3,7 @@ package com.devnics.RedLight;
 import com.devnics.RedLight.task.GameTimer;
 import com.devnics.RedLight.task.LightTimer;
 import lombok.Setter;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -10,9 +11,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class Game {
 
@@ -65,14 +64,35 @@ public class Game {
             Player player = Bukkit.getPlayer(playerUUID);
 
             if (player != null) {
+
+                String round = Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1);
+
                 this.bossbar.addPlayer(player);
 
                 player.setGameMode(GameMode.SURVIVAL);
                 player.teleport(location);
+
+                if (e) {
+                    player.sendTitle(
+                            Util.translate("&c&lElimination Round"),
+                            Util.translate("&eDo not fail."),
+                            10,
+                            20 * 2,
+                            10
+                    );
+                }
+
                 player.sendMessage(
                         "",
-                        ChatColor.GREEN + "" + ChatColor.BOLD + "Round " + Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1),
-                        e ? ChatColor.RED + "" + ChatColor.BOLD + "ELIMINATION ROUND" : ""
+                        Util.translate("&c&lRedLight &a&lGreenLight"),
+                        "",
+                        Util.translate("&a&lGO &7when the action-bar says &aGreen"),
+                        Util.translate("&c&lSTOP &7when the action-bar says &cRed"),
+                        "",
+                        Util.translate("&eRound &b{c}&e/&b{t}")
+                                .replace("{c}", round)
+                                .replace("{t}", "" + this.plugin.getConfig().getInt("rounds")),
+                        ""
                 );
             }
         }
@@ -87,6 +107,11 @@ public class Game {
         this.round = this.round - 1;
         this.light.cancel();
         this.timer.cancel();
+
+        for (UUID playerUUID: this.players) {
+            Player player = Bukkit.getPlayer(playerUUID);
+            player.sendMessage(ChatColor.GOLD + "Starting next round in 5 seconds..");
+        }
         Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
             @Override
             public void run() {
@@ -108,22 +133,31 @@ public class Game {
             }
 
             if (this.winners.size() == 0) {
-                Util.send(player, "&cGame has ended! No winners were declared!");
+                player.sendMessage(
+                        "",
+                        "&c&lGame Ended",
+                        "",
+                        Util.translate("&cNo one won the final round! Better luck next time.")
+                );
             } else {
-                String[] str = new String[2 + winners.size()];
+                String[] str = new String[winners.size()];
 
-                str[0] = "";
-                str[1] = Util.translate("&e&lWINNERS");
-
-                int index = 1;
+                int index = 0;
 
                 for (UUID winner: winners) {
-                    str[index + 1] = Util.translate("&7{i}. {plr}").replace("{i}", Integer.toString(index)).replace("{plr}", Bukkit.getPlayer(winner).getName());
+                    str[index] = Util.translate("&7{i}. {plr}").replace("{i}", Integer.toString(index + 1)).replace("{plr}", Bukkit.getPlayer(winner).getName());
                     index++;
                 };
 
                 player.sendMessage(
-                        str
+                        "",
+                        Util.translate("&c&lGame Ended"),
+                        Util.translate("&7Thank you for participating."),
+                        "",
+                        Util.translate("&dWinners")
+                );
+                player.sendMessage(
+                                str
                 );
             }
         }
@@ -140,9 +174,9 @@ public class Game {
 
         if (coins != 0) {
             this.plugin.economy.depositPlayer(player, coins);
-            Util.send(player, "You have received &e${c}!".replace("{c}", Integer.toString(coins)));
+            Util.send(player, "&7Congratulations, you won &d{c} &7coins!".replace("{c}", Integer.toString(coins)));
         } else {
-            Util.send(player, "&cYou completed the round too slow! No coins for you.");
+            Util.send(player, "&7You completed the round too slow! &cNo coins for you.");
         }
 
         winners.add(player.getUniqueId());
@@ -151,7 +185,7 @@ public class Game {
             Player plr = Bukkit.getPlayer(pl);
 
             if (plr != null)
-                plr.sendMessage(Util.translate("&7{} completed round {r}".replace("{}", player.getName()).replace("{r}", Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1))));
+                plr.sendMessage(Util.translate("&e{} &7completed round &3{r} &7and won &d{c} &7coins!".replace("{}", player.getName()).replace("{r}", Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1))).replace("{c}", "" + coins));
         }
 
         if (this.winners.size() + this.losers.size() == this.players.size()) {
@@ -199,7 +233,7 @@ public class Game {
             Player plr = Bukkit.getPlayer(pl);
 
             if (plr != null)
-                plr.sendMessage(Util.translate("&7{} failed round {r}".replace("{}", player.getName()).replace("{r}", Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1))));
+                plr.sendMessage(Util.translate("&e{} failed round &3{r}".replace("{}", player.getName()).replace("{r}", Integer.toString((this.plugin.getConfig().getInt("rounds") - this.round) + 1))));
         }
 
         if (this.round <= 2) {

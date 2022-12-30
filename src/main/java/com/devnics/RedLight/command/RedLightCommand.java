@@ -22,7 +22,7 @@ public class RedLightCommand extends BaseCommand {
     @Subcommand("join")
     public void joinGame(Player player) {
         this.plugin.game.addPlayer(player);
-        Util.send(player, "&aYou are now in the waiting area. Please wait for the next game to start.");
+        Util.send(player, "&8[&6Devnics&8] &7You are now in the waiting lobby for &cRedLight &aGreenLight");
     }
 
     @Subcommand("setrounds")
@@ -31,7 +31,7 @@ public class RedLightCommand extends BaseCommand {
         this.plugin.getConfig().set("rounds", num);
         this.plugin.saveConfig();
 
-        Util.send(player, "&aSet number of rounds in one game to {}".replace("{}", "&e" + Integer.toString(num)));
+        Util.send(player, "&8[&6Devnics&8] &aSet the number of rounds to &d{}".replace("{}", Integer.toString(num)));
     }
 
     @Subcommand("setspawn")
@@ -40,7 +40,7 @@ public class RedLightCommand extends BaseCommand {
         this.plugin.getConfig().set("arena.spawn", player.getLocation());
         this.plugin.saveConfig();
 
-        Util.send(player, "&aSet arena spawn!");
+        Util.send(player, "&8[&6Devnics&8] &aSet arena spawn!");
     }
 
     @Subcommand("start")
@@ -53,13 +53,13 @@ public class RedLightCommand extends BaseCommand {
     @CommandPermission("red.use")
     public void ChangeLight(CommandSender sender) {
         this.plugin.game.setRedLight(!this.plugin.game.isRedLight);
-        Util.send(sender, "Now: " + (this.plugin.game.isRedLight ? "&cRED" : "&aGREEN"));
+        Util.send(sender, "&8[&6Devnics&8] &7The light is now " + (this.plugin.game.isRedLight ? "&cRed" : "&aGreen"));
     }
 
     @Subcommand("end")
     @CommandPermission("red.use")
     public void End(CommandSender sender) {
         this.plugin.game.end();
-        Util.send(sender, "&cDone!");
+        Util.send(sender, "&8[&6Devnics&8] &7Ending the game..");
     }
 }
