@@ -135,7 +135,7 @@ public class Game {
             if (this.winners.size() == 0) {
                 player.sendMessage(
                         "",
-                        "&c&lGame Ended",
+                        Util.translate("&c&lGame Ended"),
                         "",
                         Util.translate("&cNo one won the final round! Better luck next time.")
                 );
