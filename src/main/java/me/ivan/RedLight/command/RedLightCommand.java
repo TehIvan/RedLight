@@ -31,58 +31,100 @@ public class RedLightCommand extends BaseCommand {
 
     @Subcommand("arena create")
     @CommandPermission("redlight.arena.create")
-    public void createArena(Player player, @Single String name) {
+    public void createArena(CommandSender sender, @Single String name) {
         // insert validation
 
         this.plugin.getArenaManager().createArena(name);
-        player.sendMessage(this.plugin.normal("Created arena known as: " + name));
+        sender.sendMessage(this.plugin.normal("Created arena known as: " + name));
     }
 
     @Subcommand("arena delete")
     @CommandPermission("redlight.arena.delete")
-    public void deleteArena(Player player, @Single String name) {
+    public void deleteArena(CommandSender sender, @Single String name) {
 
         Arena arena = this.plugin.getArenaManager().getArena(name);
 
         if (arena == null) {
-            player.sendMessage(this.plugin.error("That arena does not exist."));
+            sender.sendMessage(this.plugin.error("That arena does not exist."));
             return;
         }
 
         this.plugin.getArenaManager().deleteArena(name);
-        player.sendMessage(this.plugin.normal("Deleted arena known as: " + name));
+        sender.sendMessage(this.plugin.normal("Deleted arena known as: " + name));
     }
 
     @Subcommand("arena set deathzone")
     @CommandPermission("redlight.arena.deathzone.set")
-    public void setDeathzone(Player player, @Single String name, @Single String region) {
+    public void setDeathzone(CommandSender sender, @Single String name, @Single String region) {
         Arena arena = this.plugin.getArenaManager().getArena(name);
 
         if (arena == null) {
-            player.sendMessage(this.plugin.error("An arena by that name does not exist."));
+            sender.sendMessage(this.plugin.error("An arena by that name does not exist."));
             return;
         }
 
         arena.setDeathZone(region);
-        player.sendMessage(this.plugin.normal("The deathzone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+        sender.sendMessage(this.plugin.normal("The deathzone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
 
         this.plugin.getArenaManager().updateArena(name, arena);
     }
 
     @Subcommand("arena set safezone")
     @CommandPermission("redlight.arena.safezone.set")
-    public void setSafezone(Player player, @Single String name, @Single String region) {
+    public void setSafezone(CommandSender sender, @Single String name, @Single String region) {
         Arena arena = this.plugin.getArenaManager().getArena(name);
 
         if (arena == null) {
-            player.sendMessage(this.plugin.error("An arena by that name does not exist."));
+            sender.sendMessage(this.plugin.error("An arena by that name does not exist."));
             return;
         }
 
         arena.setSafeZone(region);
-        player.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+        sender.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
 
         this.plugin.getArenaManager().updateArena(name, arena);
+    }
+
+    @Subcommand("arena set lobby")
+    @CommandPermission("redlight.arena.lobby.set")
+    public void setLobby(CommandSender sender, @Single String name) {
+        Arena arena = this.plugin.getArenaManager().getArena(name);
+
+        if (arena == null) {
+            sender.sendMessage(this.plugin.error("An arena by that name does not exist."));
+            return;
+        }
+
+        arena.setSafeZone(region);
+        sender.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+
+        this.plugin.getArenaManager().updateArena(name, arena);
+    }
+
+    @Subcommand("arena set wait")
+    @CommandPermission("redlight.arena.wait.set")
+    public void setWait(CommandSender sender, @Single String name) {
+        Arena arena = this.plugin.getArenaManager().getArena(name);
+
+        if (arena == null) {
+            sender.sendMessage(this.plugin.error("An arena by that name does not exist."));
+            return;
+        }
+
+        arena.setSafeZone(region);
+        sender.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+
+        this.plugin.getArenaManager().updateArena(name, arena);
+    }
+    
+    @Subcommand("arena info")
+    @CommandPermission("redlight.arena.info")
+    public void arenaInfo(CommandSender sender) {
+        sender.sendMessage(
+                this.plugin.getArenaManager().getArenas().stream().map(r -> {
+                    return r.getName() + ":"
+                }).collect(Collectors.joining("\n"))
+        );
     }
 
 }

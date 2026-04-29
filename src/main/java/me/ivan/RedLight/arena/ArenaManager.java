@@ -2,7 +2,10 @@ package me.ivan.RedLight.arena;
 
 import me.ivan.RedLight.RedLightPlugin;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class ArenaManager {
 
@@ -33,5 +36,9 @@ public class ArenaManager {
 
     public Arena getArena(String name) {
         return this.arenas.get(name);
+    }
+
+    public List<Arena> getArenas() {
+        return this.arenas.values().stream().toList();
     }
 }
