@@ -1,6 +1,6 @@
-package com.devnics.RedLight.listener;
+package me.ivan.RedLight.listener;
 
-import com.devnics.RedLight.RedLightPlugin;
+import me.ivan.RedLight.RedLightPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;

@@ -1,4 +1,4 @@
-package com.devnics.RedLight;
+package me.ivan.RedLight;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

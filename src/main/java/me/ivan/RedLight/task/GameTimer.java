@@ -1,13 +1,8 @@
-package com.devnics.RedLight.task;
+package me.ivan.RedLight.task;
 
-import com.devnics.RedLight.Game;
-import com.devnics.RedLight.RedLightPlugin;
-import org.bukkit.Bukkit;
+import me.ivan.RedLight.Game;
+import me.ivan.RedLight.RedLightPlugin;
 import org.bukkit.ChatColor;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameTimer extends BukkitRunnable {

@@ -1,12 +1,12 @@
-package com.devnics.RedLight.command;
+package me.ivan.RedLight.command;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Name;
 import co.aikar.commands.annotation.Subcommand;
-import com.devnics.RedLight.RedLightPlugin;
-import com.devnics.RedLight.Util;
+import me.ivan.RedLight.RedLightPlugin;
+import me.ivan.RedLight.Util;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

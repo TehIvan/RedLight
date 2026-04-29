@@ -1,8 +1,8 @@
-package com.devnics.RedLight;
+package me.ivan.RedLight;
 
 import co.aikar.commands.PaperCommandManager;
-import com.devnics.RedLight.command.RedLightCommand;
-import com.devnics.RedLight.listener.PlayerMovement;
+import me.ivan.RedLight.command.RedLightCommand;
+import me.ivan.RedLight.listener.PlayerMovement;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;

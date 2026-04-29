@@ -1,9 +1,8 @@
-package com.devnics.RedLight;
+package me.ivan.RedLight;
 
-import com.devnics.RedLight.task.GameTimer;
-import com.devnics.RedLight.task.LightTimer;
+import me.ivan.RedLight.task.GameTimer;
+import me.ivan.RedLight.task.LightTimer;
 import lombok.Setter;
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;

@@ -1,7 +1,7 @@
-package com.devnics.RedLight.task;
+package me.ivan.RedLight.task;
 
-import com.devnics.RedLight.Game;
-import com.devnics.RedLight.RedLightPlugin;
+import me.ivan.RedLight.Game;
+import me.ivan.RedLight.RedLightPlugin;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
