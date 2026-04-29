@@ -1,6 +1,8 @@
 name: RedLight
 version: '${project.version}'
 main: me.ivan.RedLight.RedLightPlugin
-api-version: 1.19
+authors:
+  - Ivan
+api-version: 1.21.11
 depend:
   - Vault
