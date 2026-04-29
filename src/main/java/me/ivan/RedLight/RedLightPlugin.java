@@ -53,4 +53,10 @@ public final class RedLightPlugin extends JavaPlugin {
                 this.getConfig().getString("lang.prefix") + this.getConfig().getString("lang.color-normal") + message
         );
     }
+
+    public Component error(String message) {
+        return MiniMessage.miniMessage().deserialize(
+                this.getConfig().getString("lang.prefix") + this.getConfig().getString("lang.color-error") + message
+        );
+    }
 }
