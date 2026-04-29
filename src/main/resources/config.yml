@@ -1,9 +1,3 @@
-rounds: 5
-waitlobby: wait
-arena:
-  safezoneX: 5
-  spawnX: -18
-  spawn:
 lang:
   prefix: "<green><bold>REDLIGHT <black>> "
   color-normal: "<gray>"

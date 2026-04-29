@@ -1,6 +1,7 @@
 name: RedLight
 version: '${project.version}'
 main: me.ivan.RedLight.RedLightPlugin
+description: A single instanced RedLight GreenLight game. Inspired from Squid Game. Originally made for Devnics Studios.
 authors:
   - Ivan
 api-version: 1.21.11
