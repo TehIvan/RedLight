@@ -22,8 +22,16 @@ public class ArenaManager {
         Arena arena = new Arena();
 
         arena.setName(name);
-
+        this.arenas.put(name, arena);
 
     }
     public void deleteArena(String name) {}
+
+    public void updateArena(String name, Arena arena) {
+        this.arenas.put(name, arena);
+    }
+
+    public Arena getArena(String name) {
+        return this.arenas.get(name);
+    }
 }
