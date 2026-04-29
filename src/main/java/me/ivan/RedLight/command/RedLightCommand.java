@@ -28,5 +28,12 @@ public class RedLightCommand extends BaseCommand {
         );
     }
 
+    @Subcommand("arena create")
+    @CommandPermission("redlight.arena.create")
+    public void createArena(Player player, @Single String name) {
+
+
+        player.sendMessage(this.plugin.normal("Created arena known as: " + name));
+    }
 
 }

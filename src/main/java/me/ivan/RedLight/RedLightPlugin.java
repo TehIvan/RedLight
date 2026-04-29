@@ -2,6 +2,7 @@ package me.ivan.RedLight;
 
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
+import me.ivan.RedLight.arena.ArenaManager;
 import me.ivan.RedLight.command.RedLightCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -14,6 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RedLightPlugin extends JavaPlugin {
 
     private Economy economy;
+
+    private ArenaManager arenaManager;
 
     public void setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -29,9 +32,10 @@ public final class RedLightPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
         setupEconomy();
+
+        this.arenaManager = new ArenaManager(this);
+
         this.saveDefaultConfig();
 
         PaperCommandManager manager = new PaperCommandManager(this);

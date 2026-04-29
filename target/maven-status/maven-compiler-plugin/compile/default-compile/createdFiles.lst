@@ -1,9 +1,2 @@
-me\ivan\RedLight\task\GameTimer.class
 me\ivan\RedLight\command\RedLightCommand.class
 me\ivan\RedLight\RedLightPlugin.class
-me\ivan\RedLight\Game.class
-me\ivan\RedLight\Game$1.class
-me\ivan\RedLight\task\LightTimer.class
-me\ivan\RedLight\Util.class
-me\ivan\RedLight\Game$2.class
-me\ivan\RedLight\listener\PlayerMovement.class
