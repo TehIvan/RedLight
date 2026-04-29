@@ -4,3 +4,7 @@ arena:
   safezoneX: 5
   spawnX: -18
   spawn:
+lang:
+  prefix: "<green><bold>REDLIGHT <black>> "
+  color-normal: "<gray>"
+  color-error: "<red>"
