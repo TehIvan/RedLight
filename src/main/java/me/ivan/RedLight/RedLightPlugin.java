@@ -51,6 +51,7 @@ public final class RedLightPlugin extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    // Chat Utilities (Maybe move to extra util class one day..)
     public Component normal(String message) {
         return MiniMessage.miniMessage().deserialize(
                 this.getConfig().getString("lang.prefix") + this.getConfig().getString("lang.color-normal") + message
