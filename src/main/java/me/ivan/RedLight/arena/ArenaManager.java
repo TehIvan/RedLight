@@ -18,6 +18,12 @@ public class ArenaManager {
         }
     }
 
-    public void createArena(String name) {}
+    public void createArena(String name) {
+        Arena arena = new Arena();
+
+        arena.setName(name);
+
+
+    }
     public void deleteArena(String name) {}
 }

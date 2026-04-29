@@ -10,14 +10,16 @@ import java.util.UUID;
 public class Arena {
     // config
     // Use worldguard regions.
+    private String name;
+
     private String deathZone;
     private String safeZone;
 
-    private boolean rewardEnabled;
-    private double rewardMoney;
+    private boolean rewardEnabled = true;
+    private double rewardMoney = 500;
 
-    private int rounds;
-    private int maxPlayers;
+    private int rounds = 5;
+    private int maxPlayers = 10;
 
     // locations
     private String waitWorld;
@@ -31,7 +33,7 @@ public class Arena {
     private double lobbyZ;
 
     // active variables
-    private ArenaState state;
+    private ArenaState state = ArenaState.WAITING;
     private ArrayList<UUID> players;
     private int currentRound = 0;
 
