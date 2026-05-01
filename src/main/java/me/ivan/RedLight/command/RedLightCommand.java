@@ -87,7 +87,7 @@ public class RedLightCommand extends BaseCommand {
 
     @Subcommand("arena set lobby")
     @CommandPermission("redlight.arena.lobby.set")
-    public void setLobby(CommandSender sender, @Single String name) {
+    public void setLobby(Player sender, @Single String name) {
         Arena arena = this.plugin.getArenaManager().getArena(name);
 
         if (arena == null) {
@@ -95,15 +95,21 @@ public class RedLightCommand extends BaseCommand {
             return;
         }
 
-        arena.setSafeZone(region);
-        sender.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+        double locX = sender.getLocation().getX();
+        double locY = sender.getLocation().getY();
+        double locZ = sender.getLocation().getZ();
+
+        arena.setLobbyX(locX);
+        arena.setLobbyY(locY);
+        arena.setLobbyZ(locZ);
+        sender.sendMessage(this.plugin.normal("The lobby has been set to " + locX + ":" + locY + ":"  + locZ + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
 
         this.plugin.getArenaManager().updateArena(name, arena);
     }
 
     @Subcommand("arena set wait")
     @CommandPermission("redlight.arena.wait.set")
-    public void setWait(CommandSender sender, @Single String name) {
+    public void setWait(Player sender, @Single String name) {
         Arena arena = this.plugin.getArenaManager().getArena(name);
 
         if (arena == null) {
@@ -111,8 +117,14 @@ public class RedLightCommand extends BaseCommand {
             return;
         }
 
-        arena.setSafeZone(region);
-        sender.sendMessage(this.plugin.normal("The safezone region has been set to " + region + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
+        double locX = sender.getLocation().getX();
+        double locY = sender.getLocation().getY();
+        double locZ = sender.getLocation().getZ();
+
+        arena.setWaitX(locX);
+        arena.setWaitY(locY);
+        arena.setWaitZ(locZ);
+        sender.sendMessage(this.plugin.normal("The wait area has been set to " + locX + ":" + locY + ":"  + locZ + " for the arena " + name + ". Please ensure this is a valid worldguard region."));
 
         this.plugin.getArenaManager().updateArena(name, arena);
     }
@@ -122,7 +134,7 @@ public class RedLightCommand extends BaseCommand {
     public void arenaInfo(CommandSender sender) {
         sender.sendMessage(
                 this.plugin.getArenaManager().getArenas().stream().map(r -> {
-                    return r.getName() + ":"
+                    return r.getName() + ": " + r.getState().name();
                 }).collect(Collectors.joining("\n"))
         );
     }
