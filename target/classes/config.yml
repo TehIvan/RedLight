@@ -1,5 +1,0 @@
-lang:
-  prefix: "<green><bold>REDLIGHT <black>> "
-  color-normal: "<gray>"
-  color-error: "<red>"
-arenas:
